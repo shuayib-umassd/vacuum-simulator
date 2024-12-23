@@ -4,67 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A robot vacuum simulation project utilizing Deep Q-Networks (DQN) for reinforcement learning with visualization and performance metrics.">
+    <meta name="description" content="Agent-based room mapping and navigation using reinforcement learning with real-time visualization and simulation.">
     <meta name="author" content="Shuayib Abdulkadir">
-    <title>A robot vacuum cleaner simulation project utilizing Deep Q-Networks (DQN) for reinforcement learning</title>
+    <title>Agent-Based Room Mapping and Navigation with Reinforcement Learning</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', Arial, sans-serif;
             line-height: 1.8;
             color: #2c3e50;
-            background-color: #fdfdfd;
+            background-color: #f7f9fc;
             margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #34495e;
+            color: #ecf0f1;
             padding: 20px;
-            max-width: 900px;
-            margin: 0 auto;
+            text-align: center;
         }
 
-        h1, h2, h3 {
-            color: #34495e;
-        }
-
-        h1 {
+        header h1 {
+            margin: 0;
             font-size: 2.5rem;
-            margin-bottom: 10px;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2rem;
+        }
+
+        #forkongithub {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        #forkongithub a {
+            display: inline-flex;
+            align-items: center;
+            background: #1abc9c;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        #forkongithub a:hover {
+            background: #16a085;
+            transform: scale(1.05);
+        }
+
+        section {
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            max-width: 900px;
         }
 
         h2 {
-            font-size: 2rem;
-            margin-top: 20px;
+            color: #34495e;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #1abc9c;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
         }
 
         h3 {
-            font-size: 1.5rem;
-            margin-top: 15px;
+            font-size: 1.4rem;
+            margin-top: 20px;
         }
 
         p, li {
             font-size: 1rem;
-        }
-
-        code, pre {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: #ecf0f1;
-            padding: 5px;
-            border-radius: 4px;
-            display: inline-block;
-        }
-
-        pre {
-            padding: 15px;
-            margin: 20px 0;
-            overflow-x: auto;
-        }
-
-        a {
-            color: #1abc9c;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        a:hover {
-            text-decoration: underline;
         }
 
         ul, ol {
@@ -72,11 +90,28 @@
             margin-bottom: 20px;
         }
 
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background: #eef2f7;
+            color: #e74c3c;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
         footer {
             text-align: center;
             margin-top: 40px;
             padding: 20px 0;
-            color: #7f8c8d;
+            background: #2c3e50;
+            color: #ecf0f1;
             font-size: 0.9rem;
         }
 
@@ -93,95 +128,81 @@
 </head>
 
 <body>
-    <h1>Vacuum Simulator Visualization</h1>
-    <p>This project simulates a robot vacuum cleaner's behavior using reinforcement learning, specifically a <strong>Deep Q-Network (DQN)</strong> algorithm. It evaluates and visualizes the agent's performance, showing its ability to clean a room while avoiding obstacles and optimizing its trajectory.</p>
+    <header>
+        <h1>Agent-Based Room Mapping and Navigation</h1>
+        <p>Using Reinforcement Learning with Real-Time Visualization</p>
+    </header>
 
-    <h2>Overview</h2>
-    <ul>
-        <li><strong>Simulation</strong>: A robot vacuum navigates a grid-based room to clean dirt, avoid obstacles, and learn the best strategies through reinforcement learning.</li>
-        <li><strong>Machine Learning</strong>: Utilizes the DQN algorithm, a deep reinforcement learning method, to train the vacuum cleaner agent.</li>
-        <li><strong>Visualization</strong>: Real-time rendering of the robot's actions and its performance metrics over training episodes.</li>
-    </ul>
+    <div id="forkongithub">
+        <a href="https://github.com/shuayib-umassd/vacuum-simulator/tree/main" target="_blank" aria-label="Fork this project on GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M10.9 2a1 1 0 0 0-.92.61l-3 7A1 1 0 0 0 8 11h4.18l-1.38 6.55a1 1 0 0 0 1.83.8l7-11A1 1 0 0 0 19 5h-4.38L15.36 3a1 1 0 0 0-1.13-.83l-3 1A1 1 0 0 0 10.9 2z" />
+            </svg>
+            Fork on GitHub
+        </a>
+    </div>
 
-    <h2>Machine Learning Details</h2>
-    <h3>Algorithm: Deep Q-Network (DQN)</h3>
-    <ul>
-        <li><strong>Why DQN?</strong>
-            <ul>
-                <li>Handles environments with discrete actions (e.g., moving in cardinal directions).</li>
-                <li>Efficiently learns by approximating Q-values with a neural network, avoiding the need for exhaustive state-action pair storage.</li>
-                <li>Incorporates experience replay for stable and efficient learning.</li>
-            </ul>
-        </li>
-        <li><strong>How It Works</strong>:
-            <ol>
-                <li><strong>State Representation</strong>: The robot observes its current position, the room grid layout, dirt locations, and obstacles.</li>
-                <li><strong>Action Selection</strong>: The agent selects actions using an epsilon-greedy policy.</li>
-                <li><strong>Reward Feedback</strong>: Positive for cleaning, negative for obstacles or unnecessary moves.</li>
-                <li><strong>Experience Replay</strong>: Stores transitions in a buffer and samples mini-batches during training.</li>
-                <li><strong>Q-Network Training</strong>: Updates Q-values by minimizing the Temporal Difference (TD) error.</li>
-            </ol>
-        </li>
-    </ul>
+    <section>
+        <h2>Overview</h2>
+        <p>This project simulates a robot vacuum cleaner's behavior using reinforcement learning, specifically a <strong>Deep Q-Network (DQN)</strong> algorithm. It evaluates and visualizes the agent's performance, showing its ability to clean a room while avoiding obstacles and optimizing its trajectory.</p>
+    </section>
 
-    <h2>Reward System</h2>
-    <ul>
-        <li><strong>Positive Reward</strong>: +10 for cleaning a dirt tile.</li>
-        <li><strong>Negative Rewards</strong>: -5 for hitting an obstacle, -1 for every step.</li>
-        <li><strong>Zero Reward</strong>: For neutral actions.</li>
-    </ul>
+    <section>
+        <h2>Features</h2>
+        <ul>
+            <li>Reinforcement Learning Agent: Trained using DQN to learn optimal cleaning paths.</li>
+            <li>Simulated Environment: Dynamic room layouts with dirt, obstacles, and furniture.</li>
+            <li>Real-time Visualization: Visualizes the robot’s actions and performance metrics.</li>
+            <li>Data Storage: Stores simulation results in MongoDB.</li>
+        </ul>
+    </section>
 
-    <h2>Training Process</h2>
-    <ol>
-        <li><strong>Initialization</strong>: Random room setup and robot position.</li>
-        <li><strong>Exploration and Exploitation</strong>: Balancing between exploring new strategies and exploiting learned ones.</li>
-        <li><strong>Experience Replay</strong>: Storing and sampling transitions for learning.</li>
-        <li><strong>Learning</strong>: Updating the Q-network using MSE loss.</li>
-        <li><strong>Evaluation</strong>: Measuring performance through cumulative rewards and cleaned tiles.</li>
-    </ol>
+    <section>
+        <h2>Installation</h2>
+        <ol>
+            <li>Clone the repository:
+                <pre><code>git clone https://github.com/shuayib-umassd/vacuum-simulator.git</code></pre>
+            </li>
+            <li>Install dependencies:
+                <pre><code>pip install -r data/requirements.txt</code></pre>
+            </li>
+            <li>Run the simulation:
+                <pre><code>python simulation.py</code></pre>
+            </li>
+            <li>Generate video from frames:
+                <pre><code>
+cd frames
+ffmpeg -framerate 30 -i simulation_frame_%d.png -c:v libx264 -pix_fmt yuv420p simulation.mp4
+                </code></pre>
+            </li>
+        </ol>
+    </section>
 
-    <h2>Features</h2>
-    <ul>
-        <li>Reinforcement Learning Agent trained using DQN</li>
-        <li>Simulated Environment with dynamic room layouts</li>
-        <li>Real-time Visualization using Pygame</li>
-        <li>Data Storage with MongoDB and visualization with Chart.js</li>
-        <li>Frame Capturing for video generation</li>
-    </ul>
+    <section>
+        <h2>Libraries Used</h2>
+        <ul>
+            <li>TensorFlow for DQN algorithm.</li>
+            <li>Pygame for real-time visualization.</li>
+            <li>MongoDB for data storage.</li>
+            <li>FFmpeg for video generation.</li>
+        </ul>
+    </section>
 
-    <h2>Installation and Usage</h2>
-    <ol>
-        <li><strong>Clone the Repository</strong>
-            <pre><code>git clone <repository-url>
-cd vacuum-simulator</code></pre>
-        </li>
-        <li><strong>Install Dependencies</strong>
-            <pre><code>pip install -r data/requirements.txt</code></pre>
-        </li>
-        <li><strong>Start the Backend Server</strong>
-            <pre><code>cd app
-python backend.py</code></pre>
-        </li>
-        <li><strong>Start the Frontend Server</strong>
-            <pre><code>cd web
-python -m http.server 8000</code></pre>
-        </li>
-        <li><strong>Run the Simulation</strong>
-            <pre><code>cd app
-python simulation.py</code></pre>
-        </li>
-        <li><strong>Generate Video from Frames</strong>
-            <pre><code>cd frames
-ffmpeg -framerate 30 -i simulation_frame_%d.png -vf "scale=trunc(iw/2)*2:trunc(ih/2)*2" -c:v libx264 -pix_fmt yuv420p simulation.mp4</code></pre>
-        </li>
-    </ol>
-
-    <h2>Libraries</h2>
-    <p>This project leverages TensorFlow, Pygame, Chart.js, MongoDB, and FFmpeg.</p>
+    <section>
+        <h2>Project Structure</h2>
+        <pre>
+vacuum-simulator/
+├── app/                     # Backend and simulation logic
+├── data/                    # Data and resources
+├── frames/                  # Captured frames for video
+├── web/                     # Frontend files
+└── README.md                # Project documentation
+        </pre>
+    </section>
 
     <footer>
-        Built by <a href="https://github.com/shuayib-umassd/vacuum-simulator/tree/main" target="_blank">Shuayib Abdulkadir</a>. <br>
-        &copy; University of Massachusetts Dartmouth, December 2024
+        <a href="https://github.com/shuayib-umassd/vacuum-simulator/tree/main" target="_blank">Shuayib Abdulkadir</a> <br>
+        &copy; University of Massachusetts Dartmouth, December 2024.
     </footer>
 </body>
 

@@ -1,0 +1,9 @@
+
+flask
+pymongo
+flask-cors
+pygame
+numpy
+tensorflow
+matplotlib
+

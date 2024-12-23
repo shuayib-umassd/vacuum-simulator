@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vacuum Simulator Visualization</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        canvas {
+            max-width: 800px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vacuum Simulator Visualization</h1>
+    <p>Performance data of the robot vacuum cleaner simulation</p>
+    <canvas id="rewardChart"></canvas>
+
+    <script>
+        // Fetch simulation data from the backend
+        fetch('http://74.249.90.146:5000/get_simulations') // Updated URL
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Extract episodes and rewards from the data
+                const episodes = data.map(d => d.episode);
+                const rewards = data.map(d => d.total_reward);
+
+                // Render the line chart
+                const ctx = document.getElementById('rewardChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: episodes,
+                        datasets: [{
+                            label: 'Total Reward',
+                            data: rewards,
+                            borderColor: 'rgb(75, 192, 192)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            tension: 0.1,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Simulation Rewards Over Episodes'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Total Reward'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Episode'
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching simulation data:', error);
+                const errorMessage = document.createElement('p');
+                errorMessage.textContent = 'Failed to load simulation data. Please try again later.';
+                errorMessage.style.color = 'red';
+                document.body.appendChild(errorMessage);
+            });
+    </script>
+</body>
+</html>
